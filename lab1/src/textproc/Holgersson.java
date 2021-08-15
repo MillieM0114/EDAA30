@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import org.w3c.dom.Text;
-
 public class Holgersson {
 
 	public static final String[] REGIONS = {"nils", "norge", "blekinge", "bohuslän", "dalarna", "dalsland", "gotland", "gästrikland",
@@ -32,26 +30,20 @@ public class Holgersson {
 		
 		s.findWithinHorizon("\uFEFF", 1);
 		s.useDelimiter("(\\s|,|\\.|:|;|!|\\?|'|\\\")+"); // se handledning
-
+		
 		while(scan.hasNext()) {
 			String putMe = scan.next().toLowerCase();
 			stopwords.add(putMe);
 		}
 		scan.close();
-
 		TextProcessor r = new GeneralWordCounter(stopwords);
-
-			while (s.hasNext()) {
+		while (s.hasNext()) {
 			String word = s.next().toLowerCase();
-			//multi.process(word);
 			r.process(word);
 		} 
-
 		s.close();
 		r.report();
 		long t1 = System.nanoTime();
-
 		System.out.println("Tid: " + (t1 - t0) / 1000000.0 + " ms");
-	//	multi.report();
 	}
 }
